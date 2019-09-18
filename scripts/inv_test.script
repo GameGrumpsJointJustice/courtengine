@@ -36,18 +36,33 @@ END_DEFINE
 
 DEFINE ExamineTest
     POSE Mia HIDDEN
+
+    SET_FLAG ExaminedFlag True
+
     SPEAK Phoenix
         "Examined successfully."
+
     POSE Mia Normal
 END_DEFINE
 
 DEFINE ExamineLobby
+    IF ExaminedFlag IS True THEN ExamineLobby2
+
     EXAMINE
         "50" "50" "100" "100" ExamineTest
 
 END_DEFINE
 
+DEFINE ExamineLobby2
+    EXAMINE
+        "100" "100" "150" "150" ExamineTest
+
+END_DEFINE
+
 DEFINE ChooseLobby
+    SPEAK Mia
+        "Howdy2"
+
     INVESTIGATION_MENU 
         "Examine" ExamineLobby
         "Move" ChooseLobby

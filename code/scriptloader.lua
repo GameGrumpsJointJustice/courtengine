@@ -219,6 +219,15 @@ function LoadScript(scene, scriptPath)
                     examinationQueue = {}
                 end
 
+                if lineParts[1] == "SET_FLAG" then
+                    table.insert(events, NewSetFlagEvent(lineParts[2], lineParts[3]))
+                end
+                if lineParts[1] == "IF"
+                and lineParts[3] == "IS"
+                and lineParts[5] == "THEN" then
+                    table.insert(events, NewIfEvent(lineParts[2], lineParts[4], lineParts[6]))
+                end
+
                 if lineParts[1] == "SPEAK" then
                     queuedSpeak = {lineParts[2], "literal", lineParts[3]}
                 end

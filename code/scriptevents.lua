@@ -276,6 +276,7 @@ function NewClearExecuteDefinitionEvent(def)
     self.update = function (self, scene, dt)
         if not self.hasRun then
             self.hasRun = true
+            scene.events = {}
             scene:runDefinition(self.def, 2)
         end
 
@@ -413,6 +414,37 @@ function NewScreenShakeEvent()
 
     self.update = function (self, scene, dt)
         ScreenShake = 0.15
+        return false
+    end
+
+    return self
+end
+
+function NewSetFlagEvent(flag, set)
+    local self = {}
+    self.flag = flag
+    self.set = set
+
+    self.update = function (self, scene, dt)
+        scene.flags[self.flag] = self.set
+        print("set " .. self.flag .. " to " .. self.set)
+        return false
+    end
+
+    return self
+end
+
+function NewIfEvent(flag, test, def)
+    local self = {}
+    self.flag = flag
+    self.test = test
+    self.def = def
+
+    self.update = function (self, scene, dt)
+        if scene.flags[self.flag] == self.test then
+            scene:runDefinition(self.def, 2)
+        end
+
         return false
     end
 
