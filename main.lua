@@ -1,24 +1,43 @@
-require "courtscene"
-require "scriptloader"
-require "scriptevents"
+require "code/courtscene"
+require "code/scriptloader"
+require "code/scriptevents"
+require "code/trialscriptevents"
+require "code/investigationscriptevents"
 
-function love.load()
+function love.load(arg)
     love.window.setMode(GraphicsWidth()*4, GraphicsHeight()*4, {})
     love.graphics.setDefaultFilter("nearest")
     love.graphics.setLineStyle("rough")
     Renderable = love.graphics.newCanvas(GraphicsWidth(), GraphicsHeight())
     MasterVolume = 0.25
     TextScrollSpeed = 30
+    ScreenShake = 0
 
     LoadAssets()
 
     -- set up the current scene
-    Episode = {
-        "general1.script",
-        "general2.script"
-    }
+    Episode = {}
+    for line in love.filesystem.lines("scripts/episode1.meta") do
+        table.insert(Episode, line)
+    end
     SceneIndex = 0
     NextScene()
+
+    local argIndex = 1
+
+    while argIndex <= #arg do
+        if arg[argIndex] == "script" then
+            CurrentScene = NewScene(arg[argIndex+1])
+            CurrentScene:update(0)
+        end
+
+        if arg[argIndex] == "skip" then
+            for i=1, tonumber(arg[argIndex+1]) do
+                table.remove(CurrentScene.events, 1)
+            end
+        end
+        argIndex = argIndex + 1
+    end
 end
 
 function NextScene()
@@ -39,6 +58,7 @@ end
 function LoadAssets()
     Backgrounds = {
         NONE = {},
+        BLACK_SCREEN = {love.graphics.newImage("backgrounds/blackscreen.png")},
         LOBBY = {love.graphics.newImage("backgrounds/lobby.png")},
         COURT_DEFENSE = {love.graphics.newImage("backgrounds/defenseempty.png"), love.graphics.newImage("backgrounds/defensedesk.png")},
         COURT_PROSECUTION = {love.graphics.newImage("backgrounds/prosecutorempty.png"), love.graphics.newImage("backgrounds/prosecutiondesk.png")},
@@ -94,8 +114,8 @@ function LoadAssets()
         v:setVolume(MasterVolume/2)
     end
 
-    GameFont = love.graphics.newImageFont("FontImage.png", " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.!?~():", 2)
-    SmallFont = love.graphics.newImageFont("SmallFontImage.png", " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.!?~():", 1)
+    GameFont = love.graphics.newImageFont("sprites/FontImage.png", " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.!?~():,-'*", 2)
+    SmallFont = love.graphics.newImageFont("sprites/SmallFontImage.png", " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.!?~():", 1)
     love.graphics.setFont(GameFont)
 end
 
@@ -110,6 +130,7 @@ end
 -- love.update and love.draw get called 60 times per second
 -- transfer the update and draw over to the current game scene 
 function love.update(dt)
+    ScreenShake = math.max(ScreenShake - dt, 0)
     CurrentScene:update(dt)
 end
 
@@ -118,10 +139,18 @@ function love.draw()
     love.graphics.setCanvas(Renderable)
     love.graphics.clear(1,1,1)
     CurrentScene:draw()
+
     love.graphics.setCanvas()
 
+    local dx,dy = 0,0
+
+    if ScreenShake > 0 then
+        dx = love.math.random()*choose{1,-1}*2
+        dy = love.math.random()*choose{1,-1}*2
+    end
+    
     love.graphics.setColor(1,1,1)
-    love.graphics.draw(Renderable, 0,0, 0, love.graphics.getWidth()/GraphicsWidth(), love.graphics.getHeight()/GraphicsHeight())
+    love.graphics.draw(Renderable, dx*love.graphics.getWidth()/GraphicsWidth(),dy*love.graphics.getHeight()/GraphicsHeight(), 0, love.graphics.getWidth()/GraphicsWidth(), love.graphics.getHeight()/GraphicsHeight())
 end
 
 -- utility functions 

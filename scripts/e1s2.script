@@ -1,0 +1,177 @@
+SET_SCENE_TYPE TRIAL 
+
+CHARACTER_INITIALIZE Phoenix characters/phoenix MALE
+CHARACTER_INITIALIZE_POSE Phoenix Point
+CHARACTER_INITIALIZE_POSE Phoenix Sweaty
+CHARACTER_INITIALIZE_POSE Phoenix Confident
+CHARACTER_INITIALIZE_ANIMATION Phoenix DeskSlam
+CHARACTER_INITIALIZE_SOUND Phoenix objection
+CHARACTER_INITIALIZE_SOUND Phoenix holdit
+
+CHARACTER_INITIALIZE Payne characters/payne MALE
+CHARACTER_INITIALIZE_POSE Payne Confident
+CHARACTER_INITIALIZE_POSE Payne Sweaty
+CHARACTER_INITIALIZE_SOUND Payne objection
+
+CHARACTER_INITIALIZE Judge characters/judge MALE
+
+CHARACTER_INITIALIZE Mia characters/mia FEMALE
+CHARACTER_INITIALIZE_POSE Mia Ohmy
+
+CHARACTER_LOCATION Phoenix COURT_DEFENSE
+CHARACTER_LOCATION Payne COURT_PROSECUTION
+CHARACTER_LOCATION Judge COURT_JUDGE
+CHARACTER_LOCATION Mia COURT_ASSISTANT
+
+EVIDENCE_INITIALIZE Badge "Attorney's Badge" "My prized possesion." evidence/badge.png
+COURT_RECORD_ADD Badge
+
+DEFINE TRIAL_FAIL
+    SPEAK_FROM COURT_JUDGE
+        "Phoenix, you lost."
+
+    POSE Payne Confident
+    SPEAK_FROM COURT_PROSECUTION
+        "Haha! The rookie killer strikes again."
+
+    POSE Mia Ohmy
+    SPEAK_FROM COURT_ASSISTANT
+        "Phoenix, how could you?"
+
+    GAME_OVER
+END_DEFINE
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// START OF TRIAL
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+TYPEWRITER
+    "August 3, 10:00 AM#District Court#Courtroom No. 2"
+
+WIDESHOT
+GAVEL
+
+PLAY_MUSIC TRIAL
+
+SPEAK_FROM COURT_JUDGE
+    "The court is now in session for the trial of Mr. Larry Butz."
+
+SPEAK_FROM COURT_PROSECUTION
+    "The prosecution is ready, Your Honor."
+
+SPEAK_FROM COURT_DEFENSE
+    "The, um, defense is ready, Your Honor."
+
+SPEAK_FROM COURT_JUDGE
+    "Ahem."
+
+SPEAK_FROM COURT_JUDGE
+    "Mr. Wright?"
+
+SPEAK_FROM COURT_JUDGE
+    "This is your first trial, is it not?"
+
+SPEAK_FROM COURT_DEFENSE
+    "Y-Yes, Your Honor. I'm, um, a little nervous."
+
+SPEAK_FROM COURT_JUDGE
+    "Your conduct during this trial will decide the fate of your client."
+
+SPEAK_FROM COURT_JUDGE
+    "Murder is a serious charge. For your client's sake, I hope you can control your nerves."
+
+SPEAK_FROM COURT_DEFENSE
+    "Thank... thank you, Your Honor."
+
+SPEAK_FROM COURT_JUDGE
+    "..."
+
+SPEAK_FROM COURT_JUDGE
+    "Mr. Wright, given the circumstances..."
+
+SPEAK_FROM COURT_JUDGE
+    "I think we should have a test to ascertain your readiness."
+
+SPEAK_FROM COURT_DEFENSE
+    "Yes, Your Honor."
+
+THINK_FROM COURT_DEFENSE
+    "(Gulp... Hands shaking... Eyesight... fading...)"
+
+SPEAK_FROM COURT_JUDGE
+    "This test will consist of a few simple questions. Answer them clearly and concisely."
+
+SPEAK_FROM COURT_JUDGE
+    "Please state the name of the defendant in this case."
+
+DEFINE DefendantPhoenix
+    SPEAK_FROM COURT_DEFENSE
+        "Um... the defendant... is me, right?"
+    
+    SPEAK_FROM COURT_ASSISTANT
+        "Wright! Have you completely lost your mind? Focus!"
+    
+    SPEAK_FROM COURT_ASSISTANT
+        "The defendant is the person on trial!"
+    
+    SPEAK_FROM COURT_ASSISTANT
+        "You're his lawyer!"
+    
+    SPEAK_FROM COURT_DEFENSE
+        "Um, er, eh?#Oh yeah, right! Eh heh heh."
+    
+    SPEAK_FROM COURT_ASSISTANT
+        "This is no laughing matter!"
+    
+    SPEAK_FROM COURT_ASSISTANT
+        "You did pass the bar, didn't you?"
+
+    SPEAK_FROM COURT_JUDGE
+        "Sorry, I couldn't hear your answer. I'll ask once more:"
+
+END_DEFINE
+
+DEFINE DefendantMia
+    SPEAK_FROM COURT_DEFENSE
+        "The, um, defendant? That's... er... Mia Fey?"
+
+    SPEAK_FROM COURT_ASSISTANT
+        "Wrong, Wright. Look, I have to leave."
+
+    SPEAK_FROM COURT_ASSISTANT
+        "I have to go home. I'm... I'm expecting a delivery."
+   
+    SPEAK_FROM COURT_DEFENSE
+        "Aw, c'mon Chief. There's no need to be going so soon, is there?"
+
+    SPEAK_FROM COURT_ASSISTANT
+        "Wright!"
+
+    SPEAK_FROM COURT_ASSISTANT
+        "Listen: the defendant is the one on trial--your client!"
+
+    SPEAK_FROM COURT_ASSISTANT
+        "I mean, that's about as basic as you can get!"
+    
+    THINK_FROM COURT_DEFENSE
+        "(I've put my foot in it this time! I've got to relax!)"
+    
+    SPEAK_FROM COURT_JUDGE
+        "Sorry, I couldn't hear your answer. I'll ask once more:"
+        
+END_DEFINE
+
+CHOICE
+    "Phoenix Wright" DefendantPhoenix
+    "Mia Fey" DefendantMia
+    "Larry Butz" 0
+
+SPEAK_FROM COURT_DEFENSE
+    "The defendant? Well, that's Larry Butz, Your Honor."
+SPEAK_FROM COURT_JUDGE
+    "Correct."
+SPEAK_FROM COURT_JUDGE
+    "Just keep your wits about you and you'll do fine."
+
+SPEAK_FROM COURT_JUDGE
+    "Next question:"

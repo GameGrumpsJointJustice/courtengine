@@ -107,9 +107,9 @@ SPEAK_FROM COURT_ASSISTANT
     "Phoenix you don't look so good..."
 
 JUMPCUT COURT_DEFENSE
-ANIMATION Phoenix DeskSlam
 POSE Phoenix Point
 OBJECTION Phoenix
+ANIMATION Phoenix DeskSlam
 SPEAK_FROM COURT_DEFENSE 
     "I have to use the bathroom!"
 

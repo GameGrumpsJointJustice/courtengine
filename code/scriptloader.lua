@@ -11,6 +11,7 @@ function LoadScript(scene, scriptPath)
     local queuedTypewriter = nil
     local crossExaminationQueue = nil
     local choiceQueue = nil
+    local fakeChoiceQueue = nil
     local invMenuQueue = nil
     local evidenceAddQueue = nil
     local examinationQueue = nil
@@ -48,6 +49,19 @@ function LoadScript(scene, scriptPath)
                 canExecuteLine = false
             end
 
+            if fakeChoiceQueue ~= nil and canExecuteLine then
+                if #lineParts > 0 and lineParts[1] ~= "END_CHOICE" then
+                    for i=1, #lineParts do
+                        table.insert(fakeChoiceQueue, lineParts[i])
+                    end
+                else
+                    table.insert(events, NewFakeChoiceEvent(fakeChoiceQueue))
+                    fakeChoiceQueue = nil
+                end
+
+                canExecuteLine = false
+            end
+
             if invMenuQueue ~= nil and canExecuteLine then
                 if #lineParts > 0 and lineParts[1] ~= "END_INVESTIGATION_MENU" then
                     for i=1, #lineParts do
@@ -75,14 +89,14 @@ function LoadScript(scene, scriptPath)
             end
 
             if canExecuteLine and queuedSpeak ~= nil then
-                table.insert(events, NewSpeakEvent(queuedSpeak[1], lineParts[1], queuedSpeak[2]))
+                table.insert(events, NewSpeakEvent(queuedSpeak[1], lineParts[1], queuedSpeak[2], queuedSpeak[3]))
                 queuedSpeak = nil
 
                 canExecuteLine = false
             end
 
             if canExecuteLine and queuedThink ~= nil then
-                table.insert(events, NewThinkEvent(queuedThink[1], lineParts[1], queuedThink[2]))
+                table.insert(events, NewThinkEvent(queuedThink[1], lineParts[1], queuedThink[2], queuedThink[3]))
                 queuedThink = nil
 
                 canExecuteLine = false
@@ -107,7 +121,11 @@ function LoadScript(scene, scriptPath)
                     table.insert(events, NewCharInitEvent(lineParts[2], lineParts[3], lineParts[4]))
                 end
                 if lineParts[1] == "CHARACTER_INITIALIZE_POSE" then
-                    table.insert(events, NewCharPoseInitEvent(lineParts[2], lineParts[3]))
+                    if #lineParts < 4 then
+                        table.insert(events, NewCharPoseInitEvent(lineParts[2], lineParts[3]))
+                    else
+                        table.insert(events, NewCharPoseInitEvent(lineParts[2], lineParts[3], lineParts[4]))
+                    end
                 end
                 if lineParts[1] == "CHARACTER_INITIALIZE_ANIMATION" then
                     table.insert(events, NewCharAnimationInitEvent(lineParts[2], lineParts[3]))
@@ -184,6 +202,9 @@ function LoadScript(scene, scriptPath)
                 if lineParts[1] == "FADE_TO_BLACK" then
                     table.insert(events, NewFadeToBlackEvent())
                 end
+                if lineParts[1] == "SCREEN_SHAKE" then
+                    table.insert(events, NewScreenShakeEvent())
+                end
 
                 if lineParts[1] == "CROSS_EXAMINATION" then
                     crossExaminationQueue = {lineParts[2], lineParts[3], lineParts[4]}
@@ -196,22 +217,30 @@ function LoadScript(scene, scriptPath)
                 end
                 if lineParts[1] == "EXAMINE" then
                     examinationQueue = {}
-                    --table.insert(events, NewExamineEvent())
+                end
+
+                if lineParts[1] == "SET_FLAG" then
+                    table.insert(events, NewSetFlagEvent(lineParts[2], lineParts[3]))
+                end
+                if lineParts[1] == "IF"
+                and lineParts[3] == "IS"
+                and lineParts[5] == "THEN" then
+                    table.insert(events, NewIfEvent(lineParts[2], lineParts[4], lineParts[6]))
                 end
 
                 if lineParts[1] == "SPEAK" then
-                    queuedSpeak = {lineParts[2], "literal"}
+                    queuedSpeak = {lineParts[2], "literal", lineParts[3]}
                 end
                 if lineParts[1] == "THINK" then
-                    queuedThink = {lineParts[2], "literal"}
+                    queuedThink = {lineParts[2], "literal", nil}
                 end
                 if lineParts[1] == "SPEAK_FROM" then
                     table.insert(events, NewCutToEvent(lineParts[2]))
-                    queuedSpeak = {lineParts[2], "location"}
+                    queuedSpeak = {lineParts[2], "location", lineParts[3]}
                 end
                 if lineParts[1] == "THINK_FROM" then
                     table.insert(events, NewCutToEvent(lineParts[2]))
-                    queuedThink = {lineParts[2], "location"}
+                    queuedThink = {lineParts[2], "location", nil}
                 end
                 if lineParts[1] == "TYPEWRITER" then
                     queuedTypewriter = {}
@@ -333,14 +362,20 @@ function NewCharInitEvent(name, location, gender)
     return self
 end
 
-function NewCharPoseInitEvent(name, pose)
+function NewCharPoseInitEvent(name, pose, padding)
     local self = {}
     self.name = name
     self.pose = pose
 
+    if padding == nil then
+        padding = "PADDED"
+    end
+    self.padding = padding
+
     self.update = function(self, scene, dt)
         local location = scene.characters[self.name].location
-        scene.characters[self.name].poses[self.pose] = NewAnimation(location .. "/" .. self.pose .. ".png", true)
+        local padding = self.padding == "PADDED"
+        scene.characters[self.name].poses[self.pose] = NewAnimation(location .. "/" .. self.pose .. ".png", padding)
         scene.characters[self.name].poses[self.pose.."Talking"] = NewAnimation(location .. "/" .. self.pose .. "Talking.png", false)
 
         return false

@@ -1,0 +1,303 @@
+SET_SCENE_TYPE TRIAL
+
+CHARACTER_INITIALIZE Arin characters/arin MALE
+CHARACTER_INITIALIZE_POSE Arin Point
+CHARACTER_INITIALIZE_POSE Arin Sweaty
+CHARACTER_INITIALIZE_POSE Arin Confident
+CHARACTER_INITIALIZE_ANIMATION Arin DeskSlam
+CHARACTER_INITIALIZE_SOUND Arin objection
+CHARACTER_INITIALIZE_SOUND Arin holdit
+
+CHARACTER_INITIALIZE Edgeworth characters/edgeworth MALE
+CHARACTER_INITIALIZE_POSE Edgeworth Confident
+CHARACTER_INITIALIZE_POSE Edgeworth Thinking
+CHARACTER_INITIALIZE_POSE Edgeworth HandOnDesk
+CHARACTER_INITIALIZE_POSE Edgeworth Strained
+CHARACTER_INITIALIZE_ANIMATION Edgeworth Nope
+CHARACTER_INITIALIZE_SOUND Edgeworth objection
+
+CHARACTER_INITIALIZE Judge characters/judge MALE
+
+CHARACTER_INITIALIZE Mia characters/mia FEMALE
+CHARACTER_INITIALIZE_POSE Mia Ohmy
+
+CHARACTER_LOCATION Arin COURT_DEFENSE
+CHARACTER_LOCATION Edgeworth COURT_PROSECUTION
+CHARACTER_LOCATION Judge COURT_JUDGE
+CHARACTER_LOCATION Mia COURT_ASSISTANT
+
+EVIDENCE_INITIALIZE Badge "Attorney's Badge" "My prized possesion." evidence/badge.png
+COURT_RECORD_ADD Badge
+
+DEFINE TRIAL_FAIL
+    SPEAK_FROM COURT_JUDGE
+        "Arin, you lost."
+
+    POSE Edgeworth Confident
+    SPEAK_FROM COURT_PROSECUTION
+        "Haha! Suck it, dweeb."
+
+    POSE Mia Ohmy
+    SPEAK_FROM COURT_ASSISTANT
+        "Arin, how could you?"
+
+    GAME_OVER
+END_DEFINE
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// START OF TRIAL
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+TYPEWRITER
+    "August 3rd, 10:00AM#District Court#Courtroom No. 2"
+
+    WIDESHOT
+GAVEL
+
+PLAY_MUSIC TRIAL
+
+SPEAK_FROM COURT_JUDGE
+    "Court is now in session for a test trial."
+
+SPEAK_FROM COURT_PROSECUTION
+    "The prosecution is ready, Your Honor."
+
+SPEAK_FROM COURT_DEFENSE
+    "The defense is ready, Your Honor."
+
+SPEAK_FROM COURT_JUDGE
+    "First a question for the prosecution."
+SPEAK_FROM COURT_JUDGE
+    "Would you explain to the court how the victim of today's trial was killed?"
+
+JUMPCUT COURT_PROSECUTION
+POSE Edgeworth Confident
+ANIMATION Edgeworth Nope 6
+SPEAK Edgeworth
+    "He was killed to death."
+
+WIDESHOT
+GAVEL
+
+SPEAK_FROM COURT_JUDGE
+    "I see. The court accepts this into evidence."
+
+EVIDENCE_INITIALIZE Autopsy "Autopsy Report" "Time: Yesterday, Cause: Yes" evidence/autopsy.png
+COURT_RECORD_ADD Autopsy
+COURT_RECORD_ADD_ANIMATION Autopsy
+    "Autopsy added to Court Record"
+
+SPEAK_FROM COURT_JUDGE
+    "I also actually did some investigating myself."
+SPEAK_FROM COURT_JUDGE
+    "I'm a good little judge, it seems; truly independent."
+SPEAK_FROM COURT_JUDGE
+    "I should get a promotion."
+SPEAK_FROM COURT_JUDGE
+    "Anyway, I found these grapes at the crime scene."
+
+WIDESHOT
+GAVEL
+
+SPEAK_FROM COURT_JUDGE
+    "Shut up. I accept this into evidence, so screw you."
+
+EVIDENCE_INITIALIZE Grapes "Some Grapes" "Fruity." evidence/grapes.png
+COURT_RECORD_ADD Grapes
+COURT_RECORD_ADD_ANIMATION Grapes
+    "Grapes added to Court Record"
+
+SPEAK_FROM COURT_JUDGE
+    "The prosecution may call its witness."
+
+POSE Edgeworth Normal
+SPEAK_FROM COURT_PROSECUTION
+    "Yes, Your Honor."
+
+POSE Arin Sweaty
+THINK_FROM COURT_DEFENSE
+    "(This is bad... What should I do?)"
+
+CHOICE
+    "Panic" 0
+    "Give Up" 0
+
+POSE Mia Ohmy
+SPEAK_FROM COURT_ASSISTANT
+    "Arin you don't look so good..."
+
+JUMPCUT COURT_DEFENSE
+ANIMATION Arin DeskSlam
+POSE Arin Point
+OBJECTION Arin
+SPEAK_FROM COURT_DEFENSE
+    "I have to use the bathroom!"
+
+SPEAK_FROM COURT_JUDGE
+    "No can do, Arin. There is no men's bathroom in the building."
+
+POSE Mia Normal
+SPEAK_FROM COURT_ASSISTANT
+    "There is a women's bathroom though!"
+
+POSE Arin Normal
+SPEAK_FROM COURT_DEFENSE
+    "I don't need your sass right now, Mia."
+
+JUMPCUT COURT_PROSECUTION
+POSE Edgeworth Strained
+OBJECTION Edgeworth
+SPEAK_FROM COURT_PROSECUTION
+    "Can the defense cut it out with their lolligagging?"
+
+GAVEL
+
+SPEAK_FROM COURT_JUDGE
+    "Right then. On to the first witness."
+
+CHARACTER_INITIALIZE Gumshoe characters/gumshoe MALE
+CHARACTER_LOCATION Gumshoe COURT_WITNESS
+CHARACTER_INITIALIZE_POSE Gumshoe Sad
+CHARACTER_INITIALIZE_POSE Gumshoe Confident
+
+POSE Edgeworth HandOnDesk
+SPEAK_FROM COURT_PROSECUTION
+    "Witness, name and occupation please."
+
+SPEAK_FROM COURT_WITNESS
+    "Dick Gumshoe, sir. Detective."
+
+POSE Edgeworth Normal
+SPEAK_FROM COURT_PROSECUTION
+    "On with the cross examination then, Hanson."
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// START OF CROSS EXAMINATION
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+DEFINE PressA1
+    HOLD_IT Arin
+    SPEAK_FROM COURT_DEFENSE
+        "When did the victim die?"
+
+    SPEAK_FROM COURT_WITNESS
+        "Yes, he did."
+
+    SPEAK_FROM COURT_JUDGE
+        "Arin, that was a stupid question to ask. Penalty."
+
+    ISSUE_PENALTY
+    JUMPCUT COURT_WITNESS
+END_DEFINE
+
+DEFINE PressA2
+    HOLD_IT Arin
+    SPEAK_FROM COURT_DEFENSE
+        "How cool was it?"
+
+    SPEAK_FROM COURT_WITNESS
+        "Really really cool."
+
+    SPEAK_FROM COURT_JUDGE
+        "Arin, great question. I admire your dedication to the trade."
+
+    POSE Edgeworth Thinking
+    SPEAK_FROM COURT_PROSECUTION
+        "I agree. And I don't often do that."
+
+    JUMPCUT COURT_WITNESS
+    POSE Edgeworth Normal
+END_DEFINE
+
+DEFINE PressA3
+    HOLD_IT Arin
+    SPEAK_FROM COURT_DEFENSE
+        "I forgot what I was going to say."
+
+    POSE Mia Ohmy
+    SPEAK_FROM COURT_ASSISTANT
+        "Come ON Arin, again?"
+
+    SPEAK_FROM COURT_DEFENSE
+        "I don't need your sass right now, Mia."
+
+    JUMPCUT COURT_WITNESS
+END_DEFINE
+
+DEFINE CrossExamineFail
+    OBJECTION Arin
+    SPEAK_FROM COURT_DEFENSE
+        "I object to that!"
+
+    SPEAK_FROM COURT_JUDGE
+        "Sorry Hanson. I can see no contradictions there."
+
+    ISSUE_PENALTY
+    JUMPCUT COURT_WITNESS
+END_DEFINE
+
+JUMPCUT COURT_WITNESS
+PLAY_MUSIC QUESTIONING
+
+CROSS_EXAMINATION Gumshoe "-- The Grape Danger (Grave, get it?) --" CrossExamineFail
+    "I sneezed all over my new shirt today." PressB1 0 Sad
+    "It was a cool shirt too." PressB2 0 Normal
+    "Luckily I ate some grapes at the crime scene to make me feel better." PressB3 Grapes Confident
+
+JUMPCUT COURT_DEFENSE
+ANIMATION Arin DeskSlam
+POSE Arin Point
+OBJECTION Arin
+PLAY_MUSIC OBJECTION
+SPEAK_FROM COURT_DEFENSE
+    "You couldn't have eaten grapes at the crime scene,"
+POSE Arin Confident
+SPEAK_FROM COURT_DEFENSE
+    "as the grapes at the crime scene are right here!"
+
+JUMPCUT COURT_PROSECUTION
+POSE Edgeworth HandOnDesk
+OBJECTION Edgeworth
+SPEAK_FROM COURT_PROSECUTION
+    "There is no proof that he ate the grapes at the crime scene,"
+POSE Edgeworth Confident
+SPEAK_FROM COURT_PROSECUTION
+    "He simply brought his grapes from home."
+
+WIDESHOT
+GAVEL
+
+SPEAK_FROM COURT_JUDGE
+    "That is true. Please continue your cross-exam."
+
+POSE Arin Sweaty
+THINK_FROM COURT_DEFENSE
+    "(Jeez, this is harder than I thought...)"
+
+JUMPCUT COURT_WITNESS
+PLAY_MUSIC QUESTIONING
+
+CROSS_EXAMINATION Gumshoe "-- Cause of Death --" CrossExamineFail
+    "As you can plainly see on the autopsy, the victim died." PressA1 0 Normal
+    "He had really cool curly hair, too." PressA2 0 Confident
+    "Our team arrived at the scene a little late though." PressA3 Autopsy Sad
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// AFTER CROSS EXAMINATION
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+JUMPCUT COURT_DEFENSE
+ANIMATION Arin DeskSlam
+POSE Arin Point
+OBJECTION Arin
+PLAY_MUSIC OBJECTION
+SPEAK_FROM COURT_DEFENSE
+    "This autopsy is all wrong!"
+POSE Arin Confident
+SPEAK_FROM COURT_DEFENSE
+    "How would you have known anything if you were that late?"
+
+
+
+FADE_TO_BLACK
+END_SCENE

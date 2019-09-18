@@ -1,0 +1,188 @@
+SET_SCENE_TYPE INVESTIGATION 
+
+CHARACTER_INITIALIZE Phoenix characters/phoenix MALE
+CHARACTER_LOCATION Phoenix NONE
+
+CHARACTER_INITIALIZE Mia characters/mia FEMALE
+CHARACTER_INITIALIZE_POSE Mia Ohmy
+CHARACTER_LOCATION Mia NONE
+
+CHARACTER_INITIALIZE Butz characters/butz MALE
+CHARACTER_INITIALIZE_POSE Butz Sweaty UNPADDED
+CHARACTER_INITIALIZE_POSE Butz Nervous UNPADDED
+CHARACTER_INITIALIZE_POSE Butz ThumbsUp UNPADDED
+CHARACTER_LOCATION Butz NONE
+
+CHARACTER_INITIALIZE ??? characters/butz MALE
+CHARACTER_LOCATION ??? NONE
+
+EVIDENCE_INITIALIZE Badge "Attorney's Badge" "My prized possesion." evidence/badge.png
+COURT_RECORD_ADD Badge
+
+TYPEWRITER
+    "August 3rd, 9:47AM#District Court#Defendant Lobby No. 2"
+
+PLAY_MUSIC PRELUDE
+JUMPCUT LOBBY
+
+THINK Phoenix
+    "(Boy am I nervous!)"
+
+CHARACTER_LOCATION Mia LOBBY
+SPEAK Mia
+    "Wright!"
+
+SPEAK Phoenix
+    "Oh, h-hiya, Chief."
+
+SPEAK Mia
+    "Whew!#I'm glad I made it on time."
+SPEAK Mia
+    "Well I have to say Phoenix, I'm impressed!"
+SPEAK Mia
+    "Not everyone takes on a murder trial right off the bat like this."
+SPEAK Mia
+    "It says a lot about you... and your client as well."
+
+SPEAK Phoenix
+    "Um... thanks."
+
+SPEAK Phoenix
+    "Actually, it's because I owe him a favor."
+
+SPEAK Mia
+    "A favor?"
+
+SPEAK Mia
+    "You mean, you knew the defendant before this case?"
+
+SPEAK Phoenix
+    "Yes."
+
+SPEAK Phoenix
+    "Actually, I kind of owe my current job to him."
+
+SPEAK Phoenix
+    "He's one of the reasons I became an attorney."
+
+SPEAK Mia
+    "Well, that's news to me!"
+
+SPEAK Phoenix
+    "I want to help him out any way I can!"
+
+SPEAK Phoenix
+    "I just... really want to help him, I owe him that much."
+
+SCREEN_SHAKE
+SPEAK ??? GREEN
+    "(It's over!)"
+
+SCREEN_SHAKE
+SPEAK ??? GREEN
+    "(My life, everything, it's all over!)"
+
+SPEAK Mia
+    "..."
+
+SPEAK Mia
+    "Isn't that your client screaming over there?"
+
+SPEAK Phoenix
+    "Yeah... that's him."
+
+SCREEN_SHAKE
+SPEAK ??? GREEN
+    "(Death! Despair! Ohhhh!)"
+
+SCREEN_SHAKE
+SPEAK ??? GREEN
+    "(I'm gonna do it, I'm gonna die!!!)"
+
+SPEAK Mia
+    "It sounds like he wants to die..."
+
+SPEAK Phoenix
+    "Um, yeah. *sigh*"
+
+SCREEN_SHAKE
+CHARACTER_LOCATION Butz LOBBY
+POSE Butz Nervous
+SPEAK Butz
+    "Nick!!!"
+
+SPEAK Phoenix
+    "Hey.#Hey there, Larry."
+
+POSE Butz ThumbsUp
+SPEAK Butz
+    "Dude, I'm so guilty!!#Tell them I'm guilty!!!"
+
+SPEAK Butz
+    "Gimme the death sentence! I ain't afraid to die!"
+
+SPEAK Phoenix
+    "What!?#What's wrong, Larry?"
+
+SPEAK Butz
+    "Oh, it's all over... I... I'm finished. Finished!"
+
+SPEAK Butz
+    "I can't live in a world without her! I can't!"
+
+SPEAK Butz
+    "Who... who took her away from me, Nick? Who did this!?"
+
+SPEAK Butz
+    "Aww, Nick, ya gotta tell me! Who took my baby away!?"
+
+THINK Phoenix
+    "(Hmm... The person responsible for your girlfriend's death?)"
+
+THINK Phoenix
+    "(The newspapers say it was you...)"
+
+FADE_TO_BLACK
+JUMPCUT BLACK_SCREEN
+CHARACTER_LOCATION Butz NONE
+
+SPEAK Phoenix
+    "My name is Phoenix Wright."
+
+SPEAK Phoenix
+    "Here's the story:"
+
+SPEAK Phoenix
+    "My first case is a fairly simple one."
+
+SPEAK Phoenix
+    "A young woman was killed in her apartment."
+
+SPEAK Phoenix
+    "The guy they arrested was the unlucky sap dating her:"
+
+SPEAK Phoenix
+    "Larry Butz... my best friend since grade school."
+
+SPEAK Phoenix
+    "Our school had a saying: 'When something smells, it's usually the Butz.'"
+
+SPEAK Phoenix
+    "In the 23 years I've known him, it's usually been true."
+
+SPEAK Phoenix
+    "He has a knack for getting himself in trouble."
+
+SPEAK Phoenix
+    "One thing I can say though: It's usually not his fault. He just has terrible luck."
+
+SPEAK Phoenix
+    "But I know better than anyone, that he's a good guy at heart."
+
+SPEAK Phoenix
+    "That and I owe him one. Which is why I took the case... to clear his name."
+
+SPEAK Phoenix
+    "And that's just what I'm going to do!"
+
+END_SCENE
