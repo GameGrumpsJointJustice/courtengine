@@ -106,8 +106,8 @@ function NewCrossExaminationEvent(queue)
         local canAdvance = self.textScroll >= #text and self.timer > self.animationTime
 
         local pressing = love.keyboard.isDown("x")
-        if pressing 
-        and not self.wasPressing 
+        if pressing
+        and not self.wasPressing
         and canAdvance then
             self:advanceText()
         end
@@ -120,7 +120,7 @@ function NewCrossExaminationEvent(queue)
             self:advanceText()
         end
 
-        if love.keyboard.isDown("up") 
+        if love.keyboard.isDown("up")
         and scene.showCourtRecord
         and not inTitle then
             scene.showCourtRecord = false
@@ -152,7 +152,7 @@ end
 
 function NewIssuePenaltyEvent()
     local self = {}
-    
+
     self.update = function (self, scene, dt)
         scene.penalties = scene.penalties - 1
 
@@ -249,11 +249,11 @@ function NewGavelEvent()
             --self.sources = love.audio.pause()
         end
 
-        if self.timer > 0.2 then
+        if self.timer > 0.3 then
             self.index = 2
         end
 
-        if self.timer > 0.5 then
+        if self.timer > 0.35 then
             self.index = 3
 
             if not self.hasPlayed then
@@ -262,7 +262,7 @@ function NewGavelEvent()
             end
         end
 
-        if self.timer >= 1 then
+        if self.timer >= 1.3 then
             for i,v in pairs(self.sources) do
                 v:play()
             end
