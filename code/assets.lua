@@ -32,6 +32,7 @@ function LoadAssets()
     CrossExaminationSprite = love.graphics.newImage("sprites/cross_examination.png")
     WideShotSprite = love.graphics.newImage("backgrounds/wideshot.png")
     PenaltySprite = love.graphics.newImage("sprites/exclamation.png")
+    CourtPanSprite = love.graphics.newImage("backgrounds/courtpan.png")
 
     GavelAnimation = {
         love.graphics.newImage("sprites/gavel1.png"),

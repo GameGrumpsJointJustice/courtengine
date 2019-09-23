@@ -3,8 +3,7 @@
 
 // CHARACTER_INITIALIZE format: 
 // name, folder location
-CHARACTER_INITIALIZE Arin characters/arin 
-CHARACTER_INITIALIZE_POSE Arin Point
+CHARACTER_INITIALIZE Arin characters/phoenix 
 CHARACTER_INITIALIZE Edgeworth characters/edgeworth 
 CHARACTER_INITIALIZE Judge characters/judge 
 CHARACTER_INITIALIZE Gumshoe characters/gumshoe 
@@ -36,8 +35,8 @@ END_DEFINE
 // START OF TRIAL
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-TYPEWRITER
-    "August 3rd, 9:47AM#District Cout#Defendant Lobby No. 2"
+//TYPEWRITER
+//    "August 3rd, 9:47AM#District Cout#Defendant Lobby No. 2"
 
 PLAY_MUSIC TRIAL
 
@@ -68,18 +67,18 @@ CHOICE
 SPEAK_FROM COURT_DEFENSE 
     "i'm always ready your honor"
 
-SPEAK_FROM COURT_JUDGE 
-    "prosecution are you ready?"
-
+PAN COURT_DEFENSE COURT_PROSECUTION
 SPEAK_FROM COURT_PROSECUTION
-    "yeah, i guess."
+    "and i'm ready too."
 
+PAN COURT_PROSECUTION COURT_DEFENSE
 SPEAK_FROM COURT_DEFENSE 
     "cross examination?"
 
 SPEAK_FROM COURT_PROSECUTION
     "cross examination."
 
+PAN COURT_PROSECUTION COURT_WITNESS
 SPEAK_FROM COURT_WITNESS
     "hey there pals. is it time for another cross examination?"
 

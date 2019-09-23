@@ -281,3 +281,52 @@ function NewGavelEvent()
     end
     return self
 end
+
+function NewPanEvent(from, to)
+    local self = {}
+    if from == "COURT_DEFENSE" then
+        self.xStart = 0
+    end
+    if from == "COURT_PROSECUTION" then
+        self.xStart = CourtPanSprite:getWidth() - GraphicsWidth()
+    end
+    if from == "COURT_WITNESS" then
+        self.xStart = CourtPanSprite:getWidth()/2 - GraphicsWidth()/2
+    end
+
+    if to == "COURT_DEFENSE" then
+        self.xTo = 0
+    end
+    if to == "COURT_PROSECUTION" then
+        self.xTo = CourtPanSprite:getWidth() - GraphicsWidth()
+    end
+    if to == "COURT_WITNESS" then
+        self.xTo = CourtPanSprite:getWidth()/2 - GraphicsWidth()/2
+    end
+    self.x = self.xStart
+
+    self.update = function (self, scene, dt)
+        scene.canShowBgTopLayer = false
+        scene.canShowCharacter = false
+        scene.textHidden = true
+
+        self.x = self.x + 24*dt*60*GetSign(self.xTo-self.xStart)
+        if self.xStart < self.xTo then
+            return self.x < self.xTo
+        end
+        
+        return self.x > self.xTo
+    end
+    
+    self.draw = function (self, scene)
+        love.graphics.draw(CourtPanSprite, -1*self.x, 0)
+        scene:drawCharacterAt("COURT_DEFENSE", -1*self.x, 0)
+        scene:drawBackgroundTopLayer("COURT_DEFENSE", -1*self.x, 0)
+        scene:drawCharacterAt("COURT_PROSECUTION", CourtPanSprite:getWidth() - GraphicsWidth() -1*self.x, 0)
+        scene:drawBackgroundTopLayer("COURT_PROSECUTION", CourtPanSprite:getWidth() - GraphicsWidth() -1*self.x, 0)
+        scene:drawCharacterAt("COURT_WITNESS", CourtPanSprite:getWidth()/2 - GraphicsWidth()/2 -1*self.x, 0)
+        scene:drawBackgroundTopLayer("COURT_WITNESS", CourtPanSprite:getWidth()/2 - GraphicsWidth()/2 -1*self.x, 0)
+    end
+
+    return self
+end

@@ -51,6 +51,7 @@ function NewScene(scriptPath)
         self.textCentered = false
         self.textBoxSprite = TextBoxSprite
         self.characterTalking = false
+        self.canShowBgTopLayer = true
 
         while #self.events >= 1 and not self.events[1]:update(self, dt) do
             table.remove(self.events, 1)
@@ -97,20 +98,10 @@ function NewScene(scriptPath)
         self.wasPressingLeft = pressingLeft
     end
 
-    self.draw = function (self, dt)
-        love.graphics.setColor(1,1,1)
-
-        -- draw the background of the current location
-        local background = Backgrounds[self.location]
-        if background[1] ~= nil then
-            love.graphics.draw(background[1])
-        end
-
-        -- draw the character who is at the current location
-        local character = self.characterLocations[self.location]
+    self.drawCharacterAt = function (self, characterLocation, x,y)
+        local character = self.characterLocations[characterLocation]
         if character ~= nil 
-        and self.characters[character.name].poses[character.frame] ~= nil
-        and self.canShowCharacter then
+        and self.characters[character.name].poses[character.frame] ~= nil then
             local char = self.characters[character.name]
             local pose = char.poses[character.frame]
 
@@ -122,7 +113,30 @@ function NewScene(scriptPath)
                 self.charAnimIndex = 1
             end
 
-            love.graphics.draw(pose.source, pose.anim[math.max(math.floor(self.charAnimIndex +0.5), 1)])
+            love.graphics.draw(pose.source, pose.anim[math.max(math.floor(self.charAnimIndex +0.5), 1)], x,y)
+        end
+    end
+
+    self.drawBackgroundTopLayer = function (self, location, x,y)
+        local background = Backgrounds[location]
+
+        if background[2] ~= nil then
+            love.graphics.draw(background[2], x,y)
+        end
+    end
+
+    self.draw = function (self, dt)
+        love.graphics.setColor(1,1,1)
+
+        -- draw the background of the current location
+        local background = Backgrounds[self.location]
+        if background[1] ~= nil then
+            love.graphics.draw(background[1])
+        end
+
+        -- draw the character who is at the current location
+        if self.canShowCharacter then
+            self:drawCharacterAt(self.location, 0,0)
         end
 
         love.graphics.setColor(1,1,1)
@@ -133,8 +147,8 @@ function NewScene(scriptPath)
         end
 
         -- draw the top layer of the environment, like desk on top of character
-        if background[2] ~= nil then
-            love.graphics.draw(background[2])
+        if self.canShowBgTopLayer then
+            self:drawBackgroundTopLayer(self.location, 0,0)
         end
 
         -- if the current event has an associated graphic, draw it

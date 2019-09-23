@@ -153,6 +153,9 @@ function LoadScript(scene, scriptPath)
                 if lineParts[1] == "JUMPCUT" then
                     AddToStack(events, sceneScript, NewCutToEvent(lineParts[2]), lineParts)
                 end
+                if lineParts[1] == "PAN" then
+                    AddToStack(events, sceneScript, NewPanEvent(lineParts[2], lineParts[3]), lineParts)
+                end
                 if lineParts[1] == "POSE" then
                     AddToStack(events, sceneScript, NewPoseEvent(lineParts[2], lineParts[3]), lineParts)
                 end
