@@ -110,7 +110,12 @@ function NewSpeakEvent(who, text, locorlit, color)
             scene.textTalker = scene.characterLocations[self.who].name
         end
 
-        if self.textScroll > lastScroll and self.speaks then
+        local currentChar = string.sub(self.text, math.floor(self.textScroll), math.floor(self.textScroll))
+        if self.textScroll > lastScroll 
+        and currentChar ~= " "
+        and currentChar ~= ","
+        and currentChar ~= "-"
+        and self.speaks then
             if scene.characters[scene.textTalker].gender == "MALE" then
                 Sounds.MALETALK:play()
             else

@@ -94,7 +94,11 @@ function NewCrossExaminationEvent(queue)
         scene.fullText = text
         scene.textTalker = self.who
 
-        if self.textScroll > lastScroll then
+        local currentChar = string.sub(text, math.floor(self.textScroll), math.floor(self.textScroll))
+        if self.textScroll > lastScroll
+        and currentChar ~= " "
+        and currentChar ~= ","
+        and currentChar ~= "-" then
             if scene.characters[scene.textTalker].gender == "MALE" then
                 Sounds.MALETALK:play()
             else
