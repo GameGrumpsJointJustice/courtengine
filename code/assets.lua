@@ -91,20 +91,8 @@ function LoadSprites()
             end
         end
     end
-end--[[
-    GavelAnimation = {
-        love.graphics.newImage("sprites/gavel1.png"),
-        love.graphics.newImage("sprites/gavel2.png"),
-        love.graphics.newImage("sprites/gavel3.png"),
-    }
-    TalkingHeadAnimation = {
-        love.graphics.newImage("sprites/talkingheads1.png"),
-        love.graphics.newImage("sprites/talkingheads2.png"),
-        love.graphics.newImage("sprites/talkingheads3.png"),
-        love.graphics.newImage("sprites/talkingheads2.png"),
-    }
 end
---]]
+
 function LoadShouts()
     Shouts = {}
 
