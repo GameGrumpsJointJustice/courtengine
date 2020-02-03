@@ -17,11 +17,7 @@ JUMPCUT LOBBY
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // START SCRIPT
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-POSE Dan Ohmy
 CHARACTER_LOCATION Dan LOBBY
-SPEAK Arin
-    "uhhhhhhhhhhhhhhhhhhh, anyway, yea, it's from Jory Sr. for sure."
-
 POSE Dan Normal
 SPEAK Dan
     "What does it say?"
@@ -72,8 +68,6 @@ SPEAK Arin
 CHARACTER_LOCATION Dan LOBBY
 SPEAK Dan
     "...#So...?"
-SPEAK Arin
-    "Isn't it obvious, Dan?"
 SPEAK Arin
     "Jory, don't worry, we're on it buddy, because we trust you!"
 

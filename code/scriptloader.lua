@@ -255,7 +255,11 @@ function LoadScript(scene, scriptPath)
                 end
                 if lineParts[1] == "COURT_RECORD_ADD_ANIMATION" then
                     AddToStack(stack, NewCourtRecordAddEvent(lineParts[2]), lineParts)
-                    AddToStack(stack, NewAddToCourtRecordAnimationEvent(lineParts[2]), lineParts)
+                    local displayName = lineParts[2]
+                    if lineParts[3] then
+                        displayName = lineParts[3]
+                    end
+                    AddToStack(stack, NewAddToCourtRecordAnimationEvent(lineParts[2], displayName), lineParts)
                 end
                 if lineParts[1] == "CLEAR_LOCATION" then
                     AddToStack(stack, NewClearLocationEvent(lineParts[2]), lineParts)

@@ -11,6 +11,8 @@ CHARACTER_INITIALIZE Jory jory MALE
 EVIDENCE_INITIALIZE Badge "Attorney's Badge" "My prized possession." evidence/badge.png
 COURT_RECORD_ADD EVIDENCE Badge
 
+EVIDENCE_INITIALIZE JoryLetter "Jory Sr's Letter" "Letter from the real Jory Sr." evidence/badge.png
+
 PLAY_MUSIC PRELUDE
 JUMPCUT LOBBY
 
@@ -21,11 +23,11 @@ JUMPCUT LOBBY
 CHARACTER_LOCATION Jory LOBBY
 POSE Jory Nervous
 SPEAK Arin
-    "The thing is, Jory, we don't know anything about defending anyone in a trial."
+    "I'm sorry, Jory, but we don't know anything about criminal defense!"
 SPEAK Arin
-    "We're just idiots who say stupid things for laughs on the internet.#How're we supposed to help you?"
+    "We're just idiots who say stupid things for laughs on the internet.#How are we supposed to help?"
 SPEAK Jory
-    "Yea... I don't know, I didn't really have a plan or anything."
+    "Yeah... I don't know, I didn't really have a plan or anything."
 SPEAK Jory
     "The whole thing has just thrown me for a loop and I'm kind of grasping here..."
 
@@ -41,9 +43,9 @@ SPEAK Arin
 
 CHARACTER_LOCATION Jory LOBBY
 SPEAK Jory
-    "Yea, I understand guys."
+    "Yeah, I understand guys."
 
-SFX Dooropens
+SFX Pageturn
 POSE Jory Normal
 SPEAK Jory
     "Huh? What's this?"
@@ -52,6 +54,7 @@ SPEAK Arin
 SPEAK Jory
     "Huh, it's from...#My dad?"
 
+SFX Realization
 CHARACTER_LOCATION Dan LOBBY
 POSE Dan Ohmy
 SPEAK Dan
@@ -80,10 +83,8 @@ SPEAK Arin
 
 SFX Pageturn
 SPEAK Arin
-    "...#Damn, he's right. Penix Wright!"
-
-CHARACTER_LOCATION Dan LOBBY
-SPEAK Dan
-    "..."
+    "...#Wow, he's right! We should hold on to this, I think it might be important later"
+COURT_RECORD_ADD_ANIMATION JoryLetter "Jory Sr's Letter"
+SFX Evidenceshoop
 
 END_SCENE

@@ -236,11 +236,11 @@ function NewTypeWriterEvent(text)
     return self
 end
 
-function NewAddToCourtRecordAnimationEvent(evidence)
+function NewAddToCourtRecordAnimationEvent(evidenceSpriteName, evidenceDisplayName)
     local self = {}
     self.textScroll = 1
-    self.evidence = evidence
-    self.text = self.evidence.." added to#the Court Record."
+    self.evidence = evidenceSpriteName
+    self.text = evidenceDisplayName.." added to#the Court Record."
     self.wasPressing = true
 
     self.update = function (self, scene, dt)

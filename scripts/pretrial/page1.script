@@ -26,17 +26,17 @@ THINK Arin
 JUMPCUT LOBBY
 CHARACTER_LOCATION Dan LOBBY
 SPEAK Dan
-    "So that's when I said, $qthat's not mayonnaise!$q, to which everyone responded by throwing up violently."
+    "So that's when I said, $qthat's not mayonnaise!$q"
+SPEAK Dan
+    "And everyone immediately and violently threw up."
 SPEAK Arin
     "What.#Are you talking about, Dan."
 SPEAK Dan
-    "Weren't you listening?"
-SPEAK Dan
-    "I was telling you a very important story about how I graduated from ninja party school."
+    "Weren't you listening? I was telling you a very important story about how I graduated from ninja party school."
 SPEAK Arin
     "Ninja Party School?#The infamous NPS?"
 SPEAK Dan
-    "Yea dude!#You were the one who asked me about it!"
+    "Dude!#You're the one who asked me about it!"
 SPEAK Dan
     "You said it had something to do with the 10 minute power hour we were doing today."
 
@@ -50,13 +50,13 @@ SCREEN_SHAKE
 SPEAK Dan
     "NO goddamnit, I'm asking you!"
 SPEAK Dan
-    "You asked me about my graduation party saying it had something to do with today's episode we're filming."
+    "You asked me about my graduation party and said it had to do with today's episode"
 
 POSE Dan Ohmy
 SPEAK Dan
     "You okay dude?#Your memory is worse than usual today."
 SPEAK Arin
-    "Ooooooooooooooooh mybad?#Hah, I guess I got distracted."
+    "Ooooooooooooooooh m'bad?#Hah, I guess I got distracted."
 SPEAK Dan
     "From what?"
 SPEAK Arin
@@ -70,6 +70,6 @@ SPEAK Arin
 
 POSE Dan Normal
 SPEAK Dan
-    "Yea, yea you do like poopin'."
+    "Yeah, yeah you do like poopin'."
 
 END_SCENE

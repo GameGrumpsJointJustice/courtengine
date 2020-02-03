@@ -42,18 +42,6 @@ SPEAK Arin
 POSE Dan Normal
 SPEAK Dan
     "This is no time for hilarious jokes, Arin, we have some tanks to set up!"
-SPEAK Dan
-    "Do we have two vic, ER I MEAN contestants for the tanks?"
-SPEAK Arin
-    "Well, Jory volunteered, good man that he is, and we pulled straws and Ross lost, so he's in the second tank."
-SPEAK Dan
-    "%1Ross?!%0#He's in the second tank?#That's awesome!"
-SPEAK Arin
-    "Right?#Hilarious, I know, but we better get out to the set and help them out."
-SPEAK Arin
-    "They don't know about the robot prostitutes or how they fit into all of this, so you have to let them know what's what."
-SPEAK Dan
-    "Totally dude. I'm on it!"
 
 SFX Dooropens
 POSE Dan Ohmy
@@ -66,13 +54,13 @@ CHARACTER_LOCATION Jory LOBBY
 POSE Jory Sweaty
 WAIT 2
 SPEAK Jory
-    "Yea, so apparently the dinos were missing when we started to set up for the episode."
+    "Apparently the dinos were missing when we started to set up for the episode."
 
 POSE Jory Nervous
 SPEAK Jory
-    "We spent the last 10 minutes looking for them..."
+    "We spent the last ten minutes looking for them."
 SPEAK Arin
-    "So the dinos went missing?#But it's only been 10 minutes, they can't have gone far..."
+    "Well that's not that long, they can't have gone far."
 SPEAK Jory
     "Well that's the thing... we already found them."
 
@@ -85,6 +73,8 @@ SPEAK Jory
     "The problem is...#apparently they were found in %1MY backpack%0."
 POSE Jory Sweaty
 
+SCREEN_SHAKE
+SFX Damage1
 POSE Dan Ohmy
 CHARACTER_LOCATION Dan LOBBY
 SPEAK Dan
