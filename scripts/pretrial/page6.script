@@ -5,7 +5,7 @@
 SET_SCENE_TYPE INVESTIGATION
 
 CHARACTER_INITIALIZE Arin arin MALE
-CHARACTER_INITIALIZE Dan dan FEMALE
+CHARACTER_INITIALIZE Dan dan MALE
 CHARACTER_INITIALIZE Jory jory MALE
 
 EVIDENCE_INITIALIZE Badge "Attorney's Badge" "My prized possession." evidence/badge.png
@@ -26,7 +26,8 @@ SPEAK Arin
 SPEAK Arin GREEN
     "$qHello Grumps, first of all I want to thank you for all the hard work you've done taking care of my son, Jory Jr.$q"
 
-POSE Dan Ohmy
+// Should be shocked
+POSE Dan Hair
 SPEAK Dan
     "You've gotta be kidding me."
 SPEAK Arin GREEN
@@ -43,10 +44,10 @@ SPEAK Dan
     "Wow, that was beautiful."
 SPEAK Arin GREEN
     "$qP.S., remember, the second most important thing to winning this case is love and trust!$q"
-
-POSE Dan Ohmy
 SPEAK Arin GREEN
     "$qAnd the most important thing is I have something for you if you win!$q"
+
+POSE Dan Normal
 SPEAK Dan
     "Wow... that was... beautiful?"
 SPEAK Arin
@@ -77,6 +78,7 @@ SPEAK Jory
     "Oh, uh, ok."
 
 CHARACTER_LOCATION Dan LOBBY
+POSE Dan Hair
 SPEAK Dan
     "Really Arin?"
 SPEAK Arin

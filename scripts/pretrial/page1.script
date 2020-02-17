@@ -5,7 +5,7 @@
 SET_SCENE_TYPE INVESTIGATION
 
 CHARACTER_INITIALIZE Arin arin MALE
-CHARACTER_INITIALIZE Dan dan FEMALE
+CHARACTER_INITIALIZE Dan dan MALE
 
 EVIDENCE_INITIALIZE Badge "Attorney's Badge" "My prized possession." evidence/badge.png
 COURT_RECORD_ADD EVIDENCE Badge
@@ -25,6 +25,7 @@ THINK Arin
 
 JUMPCUT LOBBY
 CHARACTER_LOCATION Dan LOBBY
+POSE Dan Normal
 SPEAK Dan
     "So that's when I said, $qthat's not mayonnaise!$q"
 SPEAK Dan
@@ -35,8 +36,11 @@ SPEAK Dan
     "Weren't you listening? I was telling you a very important story about how I graduated from ninja party school."
 SPEAK Arin
     "Ninja Party School?#The infamous NPS?"
+
+POSE Dan Angry
 SPEAK Dan
     "Dude!#You're the one who asked me about it!"
+POSE Dan Normal
 SPEAK Dan
     "You said it had something to do with the 10 minute power hour we were doing today."
 
@@ -47,28 +51,34 @@ SPEAK Arin
     "Do you know what we're doing for the ten minute power hour today?"
 
 SCREEN_SHAKE
+POSE Dan Angry
 SPEAK Dan
     "NO goddamnit, I'm asking you!"
 SPEAK Dan
     "You asked me about my graduation party and said it had to do with today's episode"
 
-POSE Dan Ohmy
+POSE Dan Lean
 SPEAK Dan
     "You okay dude?#Your memory is worse than usual today."
 SPEAK Arin
     "Ooooooooooooooooh m'bad?#Hah, I guess I got distracted."
+
+POSE Dan Normal
 SPEAK Dan
     "From what?"
 SPEAK Arin
     "Well, I got the invoice for the bathrooms today."
 SPEAK Arin
     "The plumbers just finished fixing the toilets in the north end of the building, and that got me thinking..."
+
+POSE Dan Hair
 SPEAK Dan
     "You mean you asked me to tell you all about one of the longest nights of my life just to be distracted by that?"
 SPEAK Arin
     "Well you know how much I like poopin'!"
 
-POSE Dan Normal
+// Should be facing forward
+POSE Dan SideLaugh
 SPEAK Dan
     "Yeah, yeah you do like poopin'."
 

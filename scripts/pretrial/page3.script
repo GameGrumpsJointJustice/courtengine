@@ -5,7 +5,7 @@
 SET_SCENE_TYPE INVESTIGATION
 
 CHARACTER_INITIALIZE Arin arin MALE
-CHARACTER_INITIALIZE Dan dan FEMALE
+CHARACTER_INITIALIZE Dan dan MALE
 CHARACTER_INITIALIZE Jory jory MALE
 
 EVIDENCE_INITIALIZE Badge "Attorney's Badge" "My prized possession." evidence/badge.png
@@ -27,7 +27,7 @@ SPEAK Arin
     "Did you take them?"
     
 CHARACTER_LOCATION Dan LOBBY
-POSE Dan Ohmy
+POSE Dan Angry
 SPEAK Dan
     "ARIN!"
 SPEAK Arin

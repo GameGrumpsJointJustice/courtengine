@@ -5,7 +5,7 @@
 SET_SCENE_TYPE INVESTIGATION
 
 CHARACTER_INITIALIZE Arin arin MALE
-CHARACTER_INITIALIZE Dan dan FEMALE
+CHARACTER_INITIALIZE Dan dan MALE
 CHARACTER_INITIALIZE Jory jory MALE
 CHARACTER_INITIALIZE ??? jory MALE
 
@@ -29,7 +29,7 @@ SPEAK Dan
     "You mean the whipped cream dunking machine?"
 
 SFX lightbulb
-POSE Dan Ohmy
+POSE Dan Lean
 SPEAK Dan
     "You don't mean...?"
 SPEAK Arin
@@ -44,7 +44,7 @@ SPEAK Dan
     "This is no time for hilarious jokes, Arin, we have some tanks to set up!"
 
 SFX Dooropens
-POSE Dan Ohmy
+POSE Dan Normal
 SPEAK ???
     "Actually guys, we've got a problem..."
 SPEAK Arin
@@ -75,7 +75,8 @@ POSE Jory Sweaty
 
 SCREEN_SHAKE
 SFX Damage1
-POSE Dan Ohmy
+// Should be surprised
+POSE Dan Normal
 CHARACTER_LOCATION Dan LOBBY
 SPEAK Dan
     "What?"

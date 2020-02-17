@@ -5,7 +5,7 @@
 SET_SCENE_TYPE INVESTIGATION
 
 CHARACTER_INITIALIZE Arin arin MALE
-CHARACTER_INITIALIZE Dan dan FEMALE
+CHARACTER_INITIALIZE Dan dan MALE
 CHARACTER_INITIALIZE Jory jory MALE
 
 EVIDENCE_INITIALIZE Badge "Attorney's Badge" "My prized possession." evidence/badge.png
@@ -32,6 +32,7 @@ SPEAK Jory
     "The whole thing has just thrown me for a loop and I'm kind of grasping here..."
 
 CHARACTER_LOCATION Dan LOBBY
+// should be sad posed
 SPEAK Dan
     "Sorry dude, but Arin's right.#We'd probably just screw it up."
 SPEAK Dan
@@ -56,7 +57,7 @@ SPEAK Jory
 
 SFX Realization
 CHARACTER_LOCATION Dan LOBBY
-POSE Dan Ohmy
+POSE Dan Normal
 SPEAK Dan
     "From %1Jory Sr.?%0"
 SPEAK Arin
@@ -72,6 +73,7 @@ SPEAK Arin
     "Us? Like... me and Dan?"
 
 CHARACTER_LOCATION Dan LOBBY
+POSE Dan Hair
 SPEAK Dan
     "I thought we made that up for our episodes."
 
